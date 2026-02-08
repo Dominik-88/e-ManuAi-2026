@@ -1,0 +1,22 @@
+{
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@reality/*": ["01_REALITY/*"],
+      "@digital-twin/*": ["02_DIGITAL_TWIN/*"],
+      "@ai/*": ["03_AI_LOGIC/*"],
+      "@ui/*": ["04_USER_INTERFACE/*"],
+      "@infrastructure/*": ["05_INFRASTRUCTURE/*"],
+      "@shared/*": ["06_SHARED/*"]
+    },
+    "noImplicitAny": false,
+    "noUnusedParameters": false,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "strictNullChecks": false
+  }
+}
