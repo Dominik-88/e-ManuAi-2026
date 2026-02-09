@@ -1,2 +1,2 @@
-# 01 REALITY 
- Physical world (PLC, sensors, Barbieri API)
+# 02 DIGITAL TWIN 
+ Reality model (telemetry, sessions, machine state)
