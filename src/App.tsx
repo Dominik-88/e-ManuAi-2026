@@ -44,7 +44,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/e-ManuAi-2026">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               {/* Public auth routes */}
