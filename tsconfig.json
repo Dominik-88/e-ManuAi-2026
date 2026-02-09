@@ -1,6 +1,9 @@
 {
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "references": [
+    { "path": "./tsconfig.app.json" }, 
+    { "path": "./tsconfig.node.json" }
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -18,5 +21,15 @@
     "allowJs": true,
     "noUnusedLocals": false,
     "strictNullChecks": false
-  }
+  },
+  "include": [
+    "01_REALITY",
+    "02_DIGITAL_TWIN",
+    "03_AI_LOGIC",
+    "04_USER_INTERFACE",
+    "05_INFRASTRUCTURE",
+    "06_SHARED",
+    "07_DOCUMENTATION",
+    "08_TESTING"
+  ]
 }
