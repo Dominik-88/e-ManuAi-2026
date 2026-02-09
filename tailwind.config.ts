@@ -3,13 +3,15 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: [
+    // Původní cesty - KRITICKÉ PRO FUNKČNOST STÁVAJÍCÍHO REPA
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    // Přidáno pro novou architekturu:
+    "./index.html",
+    // Nové vrstvy architektury
     "./04_USER_INTERFACE/**/*.{ts,tsx}",
-    "./06_SHARED/components/**/*.{ts,tsx}"
+    "./06_SHARED/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -69,6 +71,7 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Industriální stavové barvy definované v dokumentaci
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
@@ -81,6 +84,7 @@ export default {
           DEFAULT: "hsl(var(--info))",
           foreground: "hsl(var(--info-foreground))",
         },
+        // Ocelové barvy pro e-ManuAI design
         steel: {
           DEFAULT: "hsl(var(--steel))",
           light: "hsl(var(--steel-light))",
@@ -93,6 +97,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontSize: {
+        // Velikosti optimalizované pro terénní použití
         "field-sm": ["0.9375rem", { lineHeight: "1.4" }],
         "field-base": ["1rem", { lineHeight: "1.5" }],
         "field-lg": ["1.125rem", { lineHeight: "1.4" }],
@@ -100,8 +105,9 @@ export default {
         "mth": ["2.5rem", { lineHeight: "1.1", fontWeight: "700" }],
       },
       spacing: {
-        "touch": "3.5rem",
-        "touch-sm": "3rem",
+        // Touch-friendly rozestupy pro ovládání v rukavicích
+        "touch": "3.5rem", // 56px
+        "touch-sm": "3rem", // 48px
       },
       keyframes: {
         "accordion-down": {
