@@ -28,6 +28,17 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
+    
+    <!-- GitHub Pages SPA redirect recovery -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <meta name="twitter:title" content="e-ManuAI • by • Dominik Schmied">
     <meta name="twitter:description" content="Profesionální provozní systém pro autonomní sekací robot Barbieri XRot 95 EVO">
     <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/KzeZvsz9oLTew1mmTZNBmF3VwXx2/social-images/social-1770444633299-IMG_8415.jpeg">
