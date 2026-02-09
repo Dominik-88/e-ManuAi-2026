@@ -2,7 +2,15 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    // Přidáno pro novou architekturu:
+    "./04_USER_INTERFACE/**/*.{ts,tsx}",
+    "./06_SHARED/components/**/*.{ts,tsx}"
+  ],
   prefix: "",
   theme: {
     container: {
@@ -61,7 +69,6 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Industrial status colors
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
@@ -74,7 +81,6 @@ export default {
           DEFAULT: "hsl(var(--info))",
           foreground: "hsl(var(--info-foreground))",
         },
-        // Steel colors
         steel: {
           DEFAULT: "hsl(var(--steel))",
           light: "hsl(var(--steel-light))",
@@ -87,7 +93,6 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontSize: {
-        // Field-optimized sizes
         "field-sm": ["0.9375rem", { lineHeight: "1.4" }],
         "field-base": ["1rem", { lineHeight: "1.5" }],
         "field-lg": ["1.125rem", { lineHeight: "1.4" }],
@@ -95,9 +100,8 @@ export default {
         "mth": ["2.5rem", { lineHeight: "1.1", fontWeight: "700" }],
       },
       spacing: {
-        // Touch-friendly spacing
-        "touch": "3.5rem", // 56px
-        "touch-sm": "3rem", // 48px
+        "touch": "3.5rem",
+        "touch-sm": "3rem",
       },
       keyframes: {
         "accordion-down": {
