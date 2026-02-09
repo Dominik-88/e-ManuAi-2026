@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Linting - ponecháno volné (false) dle tvého původního souboru */
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -24,8 +24,24 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@reality/*": ["01_REALITY/*"],
+      "@digital-twin/*": ["02_DIGITAL_TWIN/*"],
+      "@ai/*": ["03_AI_LOGIC/*"],
+      "@ui/*": ["04_USER_INTERFACE/*"],
+      "@infrastructure/*": ["05_INFRASTRUCTURE/*"],
+      "@shared/*": ["06_SHARED/*"]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "01_REALITY",
+    "02_DIGITAL_TWIN",
+    "03_AI_LOGIC",
+    "04_USER_INTERFACE",
+    "05_INFRASTRUCTURE",
+    "06_SHARED",
+    "07_DOCUMENTATION",
+    "08_TESTING"
+  ]
 }
