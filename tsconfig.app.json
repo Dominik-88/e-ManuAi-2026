@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting - ponecháno volné (false) dle tvého původního souboru */
+    /* Linting - vráceno na tvé původní volné nastavení */
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -40,8 +40,6 @@
     "03_AI_LOGIC",
     "04_USER_INTERFACE",
     "05_INFRASTRUCTURE",
-    "06_SHARED",
-    "07_DOCUMENTATION",
-    "08_TESTING"
+    "06_SHARED"
   ]
 }
