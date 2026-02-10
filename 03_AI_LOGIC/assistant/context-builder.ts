@@ -1,7 +1,7 @@
 // AI Context Builder - Enriches AI requests with machine state,
 // service history, area data, and technical specifications.
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@infrastructure/database';
 
 export async function buildAIContext(machineId: string): Promise<string> {
   const [machineResult, servicesResult, areasResult, intervalsResult] = await Promise.all([
