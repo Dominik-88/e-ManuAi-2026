@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getBarbieriClient, type TelemetryData, type ConnectionState } from '@/lib/barbieri-realtime';
+import { getBarbieriClient, type TelemetryData, type ConnectionState } from '@digital-twin/telemetry/realtime-client';
 
 export function useBarbieriiClient() {
   const [telemetry, setTelemetry] = useState<TelemetryData | null>(null);
@@ -32,3 +32,6 @@ export function useBarbieriiClient() {
     startAutonomous: (sMode: number) => client.startAutonomous(sMode),
   };
 }
+
+// Re-export types for convenience
+export type { TelemetryData as BarbieriiTelemetry, ConnectionState };
