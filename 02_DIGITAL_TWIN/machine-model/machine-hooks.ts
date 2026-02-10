@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { saveMthUpdate } from '@/lib/offline-queue';
-import type { Stroj } from '@/types/database';
+import { supabase } from '@infrastructure/database';
+import { saveMthUpdate } from '@infrastructure/offline';
+import type { Stroj } from '@infrastructure/database/types/database';
 
 export function useMachine() {
   const [machine, setMachine] = useState<Stroj | null>(null);
