@@ -38,7 +38,20 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 **Current Status:** Core files migrated, remaining files need update.
 
-### Run Automated Migration (5 minutes)
+### Option 1: Node.js Batch Migration (RECOMMENDED - 1 minute)
+
+```bash
+# Run automated Node.js script
+node scripts/batch-migrate.js
+
+# Verify
+./scripts/verify-imports.sh
+
+# Test build
+npm run build
+```
+
+### Option 2: Bash Script Migration (5 minutes)
 
 ```bash
 # Make scripts executable
@@ -99,8 +112,9 @@ npm run test             # Run tests
 npm run lint             # Lint code
 
 # Migration
-./scripts/migrate-imports.sh   # Migrate imports
-./scripts/verify-imports.sh    # Verify migration
+node scripts/batch-migrate.js      # Node.js batch migration (FAST)
+./scripts/migrate-imports.sh       # Bash migration
+./scripts/verify-imports.sh        # Verify migration
 ```
 
 ---
@@ -119,7 +133,7 @@ npm run lint             # Lint code
 ### Build Errors
 
 **Error:** `Cannot find module '@/...'`  
-**Fix:** Run migration script: `./scripts/migrate-imports.sh`
+**Fix:** Run migration script: `node scripts/batch-migrate.js`
 
 **Error:** `Module not found: '@infrastructure/...'`  
 **Fix:** Check if index.ts exists in layer folder
@@ -152,5 +166,5 @@ npm run lint             # Lint code
 ---
 
 **Version:** 2.0-refactored  
-**Status:** ✅ Core migrated, Phase 2 ready  
+**Status:** ✅ Core migrated, automated tools ready  
 **License:** Proprietary
