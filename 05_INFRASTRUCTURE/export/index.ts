@@ -3,5 +3,4 @@
  * Centrální export pro PDF a Excel generování
  */
 
-export * from './pdf-export';
-export * from './excel-export';
+export { exportServicesToPDF, exportServicesToExcel } from './export-service';
