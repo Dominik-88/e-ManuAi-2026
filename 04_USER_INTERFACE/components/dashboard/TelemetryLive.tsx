@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useBarbieriiClient } from '@/hooks/useBarbieriiClient';
-import { cn } from '@/lib/utils';
+import { useBarbieriiClient } from '@shared/hooks/useBarbieriiClient';
+import { cn } from '@shared/utils';
 import { Wifi, WifiOff, Gauge, Navigation, Radio, Battery, Power, AlertTriangle, Clock, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { RTK_STATUS_INFO } from '@/types/database';
-import type { RtkStav } from '@/types/database';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
+import { Button } from '@ui/components/ui/button';
+import { RTK_STATUS_INFO } from '@infrastructure/database/types/database';
+import type { RtkStav } from '@infrastructure/database/types/database';
+import { useAuth } from '@infrastructure/auth';
+import { supabase } from '@infrastructure/database';
 import { toast } from 'sonner';
 
 export function TelemetryLive() {
