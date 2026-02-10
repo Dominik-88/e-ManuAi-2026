@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import '@/styles/industrial.css';
+import '@ui/styles/industrial.css';
 import { AppHeader } from './AppHeader';
 import { BottomNav } from './BottomNav';
 import { FloatingActionButton } from './FloatingActionButton';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@infrastructure/auth';
 
 interface AppLayoutProps {
   children?: React.ReactNode;
