@@ -1,20 +1,20 @@
 import React, { useEffect, useRef } from 'react';
-import { useMachine } from '@/hooks/useMachine';
-import { useBarbieriiClient } from '@/hooks/useBarbieriiClient';
-import { startGlobalTelemetrySync, stopGlobalTelemetrySync } from '@/lib/telemetry-sync';
-import { MthDisplay } from '@/components/dashboard/MthDisplay';
-import { MachineStatusCard } from '@/components/dashboard/MachineStatusCard';
-import { QuickActionsCard } from '@/components/dashboard/QuickActionsCard';
-import { AreaStats } from '@/components/dashboard/AreaStats';
-import { RecentActivityCard } from '@/components/dashboard/RecentActivityCard';
-import { TelemetryLive } from '@/components/dashboard/TelemetryLive';
-import { MowingSessionRecorder } from '@/components/digital-twin/MowingSessionRecorder';
-import { SessionHistory } from '@/components/digital-twin/SessionHistory';
-import { AIDiagnostics } from '@/components/diagnostics/AIDiagnostics';
-import { OfflineBanner } from '@/components/layout/OfflineIndicator';
-import { RealtimeMap } from '@/components/map/RealtimeMap';
-import { ServiceStatusCard } from '@/components/service/ServiceStatusCard';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { useMachine } from '@shared/hooks/useMachine';
+import { useBarbieriiClient } from '@shared/hooks/useBarbieriiClient';
+import { startGlobalTelemetrySync, stopGlobalTelemetrySync } from '@digital-twin/telemetry';
+import { MthDisplay } from '@ui/components/dashboard/MthDisplay';
+import { MachineStatusCard } from '@ui/components/dashboard/MachineStatusCard';
+import { QuickActionsCard } from '@ui/components/dashboard/QuickActionsCard';
+import { AreaStats } from '@ui/components/dashboard/AreaStats';
+import { RecentActivityCard } from '@ui/components/dashboard/RecentActivityCard';
+import { TelemetryLive } from '@ui/components/dashboard/TelemetryLive';
+import { MowingSessionRecorder } from '@digital-twin/sessions/MowingSessionRecorder';
+import { SessionHistory } from '@digital-twin/sessions/SessionHistory';
+import { AIDiagnostics } from '@ai/diagnostics/AIDiagnostics';
+import { OfflineBanner } from '@ui/components/layout/OfflineIndicator';
+import { RealtimeMap } from '@ui/components/map/RealtimeMap';
+import { ServiceStatusCard } from '@ui/components/service/ServiceStatusCard';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@ui/components/ui/collapsible';
 import { ChevronDown, Activity, Cpu, MapPin } from 'lucide-react';
 
 export default function DashboardPage() {
