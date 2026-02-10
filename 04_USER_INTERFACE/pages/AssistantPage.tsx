@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Trash2, Satellite, Wrench, HelpCircle, Navigation, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { useAuth } from '@/contexts/AuthContext';
-import { useMachine } from '@/hooks/useMachine';
-import { supabase } from '@/integrations/supabase/client';
-import { cn } from '@/lib/utils';
+import { Button } from '@ui/components/ui/button';
+import { ScrollArea } from '@ui/components/ui/scroll-area';
+import { useAuth } from '@infrastructure/auth';
+import { useMachine } from '@shared/hooks/useMachine';
+import { supabase } from '@infrastructure/database';
+import { cn } from '@shared/utils';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -156,7 +156,7 @@ export default function AssistantPage() {
           if (line.startsWith(':') || line.trim() === '') continue;
           if (!line.startsWith('data: ')) continue;
           const jsonStr = line.slice(6).trim();
-          if (jsonStr === '[DONE]') break;
+          if (jsonStr === 'break;
           try {
             const parsed = JSON.parse(jsonStr);
             const content = parsed.choices?.[0]?.delta?.content;
@@ -252,79 +252,64 @@ export default function AssistantPage() {
                 )}
               </div>
               {message.role === 'user' && (
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted">
-                  <User className="h-4 w-4" />
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/20">
+                  <User className="h-4 w-4 text-primary" />
                 </div>
               )}
             </div>
           ))}
-
-          {/* Typing indicator */}
-          {isLoading && messages[messages.length - 1]?.role === 'user' && (
+          {isLoading && (
             <div className="flex gap-2.5">
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70">
                 <Bot className="h-4 w-4 text-primary-foreground" />
               </div>
-              <div className="rounded-2xl rounded-tl-sm bg-muted/80 border border-border px-4 py-3">
-                <div className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="h-2 w-2 rounded-full bg-muted-foreground/50 animate-bounce" style={{ animationDelay: '300ms' }} />
-                </div>
+              <div className="flex items-center gap-1 rounded-2xl rounded-tl-sm bg-muted/80 border border-border px-4 py-3">
+                <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground/40 [animation-delay:-0.3s]" />
+                <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground/40 [animation-delay:-0.15s]" />
+                <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground/40" />
               </div>
             </div>
           )}
         </div>
       </ScrollArea>
 
-      {/* Quick prompts - show only at start */}
-      {messages.length <= 1 && (
-        <div className="flex flex-wrap gap-2 py-3">
-          {quickPrompts.map((qp, i) => (
+      {/* Quick prompts */}
+      {messages.length === 1 && !isLoading && (
+        <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
+          {quickPrompts.map((prompt, i) => (
             <button
               key={i}
-              onClick={() => sendMessage(qp.message)}
-              className="flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium transition-colors hover:bg-muted hover:border-primary/30"
+              onClick={() => sendMessage(prompt.message)}
+              className="flex shrink-0 items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs transition-all hover:border-primary hover:bg-primary/5 active:scale-95"
             >
-              <qp.icon className="h-3.5 w-3.5 text-primary" />
-              {qp.label}
+              <prompt.icon className="h-3.5 w-3.5 text-primary" />
+              <span className="whitespace-nowrap">{prompt.label}</span>
             </button>
           ))}
         </div>
       )}
 
       {/* Input */}
-      <div className="border-t border-border pt-3">
-        <div className="flex items-end gap-2">
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Napište svůj dotaz..."
-            rows={2}
-            className="flex-1 resize-none rounded-xl border border-input bg-background px-3 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
-            disabled={isLoading}
-            aria-label="Váš dotaz pro AI asistenta"
-          />
-          <button
-            type="button"
-            onClick={() => sendMessage()}
-            disabled={!input.trim() || isLoading}
-            className={cn(
-              'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all',
-              input.trim() && !isLoading
-                ? 'bg-primary text-primary-foreground active:scale-90'
-                : 'bg-muted text-muted-foreground cursor-not-allowed'
-            )}
-            aria-label="Odeslat zprávu"
-          >
-            <Send className="h-5 w-5" />
-          </button>
-        </div>
-        <p className="mt-2 text-center text-[10px] text-muted-foreground/60">
-          AI asistent • Barbieri XRot 95 EVO
-        </p>
+      <div className="flex gap-2 pt-3">
+        <textarea
+          ref={inputRef}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Napište zprávu..."
+          disabled={isLoading}
+          rows={1}
+          className="flex-1 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
+          style={{ maxHeight: '120px' }}
+        />
+        <Button
+          onClick={() => sendMessage()}
+          disabled={!input.trim() || isLoading}
+          size="icon"
+          className="h-12 w-12 shrink-0 rounded-xl"
+        >
+          <Send className="h-5 w-5" />
+        </Button>
       </div>
     </div>
   );
