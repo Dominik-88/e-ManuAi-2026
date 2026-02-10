@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { supabase } from '@/integrations/supabase/client';
-import { useMachine } from '@/hooks/useMachine';
+import { supabase } from '@infrastructure/database';
+import { useMachine } from '@shared/hooks/useMachine';
 import { toast } from 'sonner';
 import { ArrowLeft, Save, MapPin, LocateFixed, Globe, Landmark, Ruler } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@ui/components/ui/button';
+import { Input } from '@ui/components/ui/input';
+import { Textarea } from '@ui/components/ui/textarea';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from '@/components/ui/select';
+} from '@ui/components/ui/select';
 import {
   Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription,
-} from '@/components/ui/form';
-import { OKRES_NAMES } from '@/types/database';
-import type { OkresCode } from '@/types/database';
+} from '@ui/components/ui/form';
+import { OKRES_NAMES } from '@infrastructure/database/types/database';
+import type { OkresCode } from '@infrastructure/database/types/database';
 
 const areaSchema = z.object({
   nazev: z.string().min(2, 'Název musí mít alespoň 2 znaky').max(200),
@@ -250,17 +250,11 @@ export default function NewAreaPage() {
               )} />
           </div>
 
-          {/* Sticky submit */}
-          <div className="sticky bottom-20 z-30 flex gap-3 rounded-xl bg-card/95 p-3 backdrop-blur-sm border border-border">
-            <Button type="button" variant="outline" onClick={() => navigate(-1)} className="h-12 flex-1">
-              Zrušit
-            </Button>
-            <Button type="submit" disabled={submitting} className="h-12 flex-1">
-              {submitting ? (
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
-              ) : (
-                <><Save className="mr-2 h-4 w-4" /> Uložit areál</>
-              )}
+          {/* Submit */}
+          <div className="sticky bottom-0 -mx-4 -mb-4 border-t border-border bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+            <Button type="submit" disabled={submitting} className="h-12 w-full gap-2 text-base">
+              <Save className={`h-5 w-5 ${submitting ? 'animate-spin' : ''}`} />
+              {submitting ? 'Ukládám...' : 'Uložit areál'}
             </Button>
           </div>
         </form>

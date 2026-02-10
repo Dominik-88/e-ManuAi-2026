@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Settings, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { useMachine } from '@/hooks/useMachine';
+import { Button } from '@ui/components/ui/button';
+import { useAuth } from '@infrastructure/auth';
+import { useMachine } from '@shared/hooks/useMachine';
 import { OfflineIndicator } from './OfflineIndicator';
 import { NotificationCenter } from './NotificationCenter';
 import {
@@ -12,8 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Badge } from '@/components/ui/badge';
+} from '@ui/components/ui/dropdown-menu';
+import { Badge } from '@ui/components/ui/badge';
 
 export function AppHeader() {
   const { user, profile, role, signOut } = useAuth();
