@@ -1,30 +1,30 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@infrastructure/database';
+import { useAuth } from '@infrastructure/auth';
 import { Plus, Search, Filter, Wrench, Calendar, User, FileDown, FileSpreadsheet, X, DollarSign, Trash2, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Textarea } from '@/components/ui/textarea';
-import { useMachine } from '@/hooks/useMachine';
+import { Button } from '@ui/components/ui/button';
+import { Input } from '@ui/components/ui/input';
+import { Badge } from '@ui/components/ui/badge';
+import { Checkbox } from '@ui/components/ui/checkbox';
+import { Textarea } from '@ui/components/ui/textarea';
+import { useMachine } from '@shared/hooks/useMachine';
 import { formatDistanceToNow, format } from 'date-fns';
 import { cs } from 'date-fns/locale';
-import { cn } from '@/lib/utils';
-import { exportServicesToPDF, exportServicesToExcel } from '@/lib/export';
+import { cn } from '@shared/utils';
+import { exportServicesToPDF, exportServicesToExcel } from '@infrastructure/export';
 import { toast } from 'sonner';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+} from '@ui/components/ui/alert-dialog';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@ui/components/ui/dropdown-menu';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from '@/components/ui/select';
+} from '@ui/components/ui/select';
 
 const typColors: Record<string, string> = {
   'preventivní': '#22c55e',
