@@ -1,27 +1,27 @@
 import { lazy, Suspense } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@ui/components/ui/toaster";
+import { Toaster as Sonner } from "@ui/components/ui/sonner";
+import { TooltipProvider } from "@ui/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/contexts/AuthContext";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
-const AppLayout = lazy(() => import("@/components/layout/AppLayout").then(m => ({ default: m.AppLayout })));
+import { AuthProvider } from "@infrastructure/auth";
+import { ProtectedRoute } from "@infrastructure/auth";
+const AppLayout = lazy(() => import("@ui/components/layout/AppLayout").then(m => ({ default: m.AppLayout })));
 
 // Lazy-loaded route components to reduce initial JS bundle
-const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
-const LoginPage = lazy(() => import("@/pages/auth/LoginPage"));
-const SignupPage = lazy(() => import("@/pages/auth/SignupPage"));
-const ManualPage = lazy(() => import("@/pages/ManualPage"));
-const ServicePage = lazy(() => import("@/pages/ServicePage"));
-const ServiceDetailPage = lazy(() => import("@/pages/ServiceDetailPage"));
-const NewServicePage = lazy(() => import("@/pages/NewServicePage"));
-const AreasPage = lazy(() => import("@/pages/AreasPage"));
-const NewAreaPage = lazy(() => import("@/pages/NewAreaPage"));
-const NewOperationPage = lazy(() => import("@/pages/NewOperationPage"));
-const SettingsPage = lazy(() => import("@/pages/SettingsPage"));
-const AssistantPage = lazy(() => import("@/pages/AssistantPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const DashboardPage = lazy(() => import("@ui/pages/DashboardPage"));
+const LoginPage = lazy(() => import("@ui/pages/auth/LoginPage"));
+const SignupPage = lazy(() => import("@ui/pages/auth/SignupPage"));
+const ManualPage = lazy(() => import("@ui/pages/ManualPage"));
+const ServicePage = lazy(() => import("@ui/pages/ServicePage"));
+const ServiceDetailPage = lazy(() => import("@ui/pages/ServiceDetailPage"));
+const NewServicePage = lazy(() => import("@ui/pages/NewServicePage"));
+const AreasPage = lazy(() => import("@ui/pages/AreasPage"));
+const NewAreaPage = lazy(() => import("@ui/pages/NewAreaPage"));
+const NewOperationPage = lazy(() => import("@ui/pages/NewOperationPage"));
+const SettingsPage = lazy(() => import("@ui/pages/SettingsPage"));
+const AssistantPage = lazy(() => import("@ui/pages/AssistantPage"));
+const NotFound = lazy(() => import("@ui/pages/NotFound"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
