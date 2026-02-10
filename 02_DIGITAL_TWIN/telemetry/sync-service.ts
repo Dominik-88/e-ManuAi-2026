@@ -6,7 +6,7 @@
  * pro historii, analytics a offline přístup.
  */
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@infrastructure/database';
 
 const BARBIERI_API_URL = 'http://192.168.4.1:5000';
 const SYNC_INTERVAL_MS = 5000; // 5 sekund
@@ -248,26 +248,22 @@ export class TelemetrySync {
 /**
  * Singleton instance pro globální použití
  */
-let globalSyncInstance: TelemetrySync | null = null;
+let globalTelemetrySync: TelemetrySync | null = null;
 
 export function startGlobalTelemetrySync(strojId: string): TelemetrySync {
-  if (globalSyncInstance) {
-    globalSyncInstance.stop();
+  if (globalTelemetrySync) {
+    globalTelemetrySync.stop();
   }
   
-  globalSyncInstance = new TelemetrySync(strojId);
-  globalSyncInstance.start();
+  globalTelemetrySync = new TelemetrySync(strojId);
+  globalTelemetrySync.start();
   
-  return globalSyncInstance;
+  return globalTelemetrySync;
 }
 
 export function stopGlobalTelemetrySync() {
-  if (globalSyncInstance) {
-    globalSyncInstance.stop();
-    globalSyncInstance = null;
+  if (globalTelemetrySync) {
+    globalTelemetrySync.stop();
+    globalTelemetrySync = null;
   }
-}
-
-export function getGlobalTelemetrySync(): TelemetrySync | null {
-  return globalSyncInstance;
 }
