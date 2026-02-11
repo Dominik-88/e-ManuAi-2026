@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Wifi, WifiOff, RefreshCw, Check, HardDrive } from 'lucide-react';
-import { useOnlineStatus } from '@/hooks/useOnlineStatus';
-import { getCacheStorageInfo, formatBytes } from '@/lib/pwa';
-import { cn } from '@/lib/utils';
+import { useOnlineStatus } from '@shared/hooks/useOnlineStatus';
+import { getCacheStorageInfo, formatBytes } from '@infrastructure/pwa';
+import { cn } from '@shared/utils';
 
 interface OfflineIndicatorProps {
   className?: string;
@@ -16,12 +16,10 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
   const [justSynced, setJustSynced] = useState(false);
 
   useEffect(() => {
-    // Check storage info
     if (showStorage) {
       getCacheStorageInfo().then(setStorageInfo);
     }
 
-    // Check for pending items in localStorage (simple implementation)
     const pendingItems = localStorage.getItem('pendingSync');
     if (pendingItems) {
       try {
@@ -33,7 +31,6 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
     }
   }, [showStorage]);
 
-  // Show sync success animation when coming back online
   useEffect(() => {
     if (isOnline && pendingSync > 0) {
       setJustSynced(true);
@@ -44,7 +41,6 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
 
   return (
     <div className={cn('flex items-center gap-3', className)}>
-      {/* Connection status */}
       <div className={cn(
         'flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium',
         isOnline 
@@ -64,7 +60,6 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
         )}
       </div>
 
-      {/* Sync status */}
       {pendingSync > 0 && (
         <div className={cn(
           'flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium',
@@ -86,7 +81,6 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
         </div>
       )}
 
-      {/* Storage info */}
       {showStorage && storageInfo && (
         <div className="flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
           <HardDrive className="h-3.5 w-3.5" />
@@ -97,7 +91,6 @@ export function OfflineIndicator({ className, showStorage = false }: OfflineIndi
   );
 }
 
-// Full-width offline banner for page top
 export function OfflineBanner() {
   const isOnline = useOnlineStatus();
   const [show, setShow] = useState(false);
@@ -106,7 +99,6 @@ export function OfflineBanner() {
     if (!isOnline) {
       setShow(true);
     } else {
-      // Keep showing for a moment when coming back online
       const timer = setTimeout(() => setShow(false), 2000);
       return () => clearTimeout(timer);
     }
