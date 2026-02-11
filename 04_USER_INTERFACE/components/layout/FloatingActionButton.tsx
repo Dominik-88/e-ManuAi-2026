@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, X, Wrench, Clock, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+import { cn } from '@shared/utils';
 
 const actions = [
   {
@@ -32,7 +32,6 @@ export function FloatingActionButton() {
 
   return (
     <div className="fixed right-4 z-50" style={{ bottom: 'calc(4.5rem + env(safe-area-inset-bottom, 16px))' }}>
-      {/* Backdrop */}
       {isOpen && (
         <div
           className="fixed inset-0 z-[-1]"
@@ -41,7 +40,6 @@ export function FloatingActionButton() {
         />
       )}
 
-      {/* Action buttons */}
       <div
         className={cn(
           'mb-3 flex flex-col gap-2 transition-all duration-200',
@@ -68,7 +66,6 @@ export function FloatingActionButton() {
         ))}
       </div>
 
-      {/* Main FAB button - smaller */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
