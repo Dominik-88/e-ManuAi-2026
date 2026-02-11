@@ -1,15 +1,15 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { useMachine } from '@/hooks/useMachine';
+import { supabase } from '@infrastructure/database';
+import { useMachine } from '@shared/hooks/useMachine';
 import { Bell, AlertTriangle, Clock, CheckCircle, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from '@ui/components/ui/button';
+import { cn } from '@shared/utils';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@ui/components/ui/popover';
 
 interface Notification {
   id: string;
@@ -70,7 +70,6 @@ export function NotificationCenter() {
       const lastMth = lastService?.mth_pri_servisu ?? (interval.prvni_servis_mth ?? 0);
       const nextDue = lastMth + interval.interval_mth;
       const remaining = nextDue - currentMth;
-      // Dismiss key includes lastMth so it resets after a new service
       const dismissKey = `${interval.id}_${lastMth}`;
 
       if (remaining <= 0) {
