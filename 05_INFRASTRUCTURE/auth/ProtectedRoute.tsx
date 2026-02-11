@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from './AuthContext';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -25,7 +25,6 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
     return <Navigate to="/prihlaseni" replace />;
   }
 
-  // Check role requirements
   if (requiredRole) {
     if (requiredRole === 'admin' && !isAdmin) {
       return <Navigate to="/" replace />;
